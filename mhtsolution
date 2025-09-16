@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX 100   // maximum number of entries
+#define SIZE 50   // maximum length of each entry
+
+int main() {
+    char data[MAX][SIZE];   // array to store names
+    int count = 0;          // number of entries stored
+    char input[SIZE];
+    int i, found;
+
+    printf("=== Free Trial Data Storage ===\n");
+
+    while (1) {
+        printf("\nEnter a name (or type 'exit' to quit): ");
+        scanf("%s", input);
+
+        // exit condition
+        if (strcmp(input, "exit") == 0) {
+            printf("\nExiting program...\n");
+            break;
+        }
+
+        // check if already stored
+        found = 0;
+        for (i = 0; i < count; i++) {
+            if (strcmp(data[i], input) == 0) {
+                found = 1;
+                break;
+            }
+        }
+
+        if (found) {
+            printf("⚠️ '%s' is already stored.\n", input);
+        } else {
+            strcpy(data[count], input);
+            count++;
+            printf("✅ '%s' stored successfully.\n", input);
+        }
+    }
+
+    // display all stored data
+    printf("\n--- Stored Data ---\n");
+    for (i = 0; i < count; i++) {
+        printf("%d. %s\n", i + 1, data[i]);
+    }
+
+    return 0;
+}
